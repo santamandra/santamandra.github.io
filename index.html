@@ -615,17 +615,27 @@
 
     <div class="albums-grid">
 
-      <div class="album-card">
+      <div class="album-card"
+        data-title="Santa Mandra en directe al Cornamusam"
+        data-spotify="https://open.spotify.com/album/0EPXZAZpqnK62akwcXUYqn"
+        data-apple="https://music.apple.com/us/album/santa-mandra-en-directe-al-cornamusam-ep/1874394336?uo=4"
+        data-youtube="#"
+        data-amazon="https://www.amazon.es/music/player/albums/B0GL5L79BR">
         <img class="album-cover" src="https://raw.githubusercontent.com/santamandra/santamandra.github.io/refs/heads/main/assets/DirecteAlCornamusam.jpeg" alt="Album">
 
         <div class="album-content">
-          <h3>Santa Mandra en directe al Cornamusam</h3>
+          <h3>Album Name</h3>
           <p>2026 · EP</p>
           <a href="#" class="listen-link">Escoltar àlbum →</a>
         </div>
       </div>
 
-      <div class="album-card">
+      <div class="album-card"
+        data-title="Fins que porti bastó"
+        data-spotify="https://open.spotify.com/album/5TXvu2UFQgWkZB0egP0Zmz"
+        data-apple="https://music.apple.com/us/album/fins-que-porti-bast%C3%B3/1842701590?uo=4"
+        data-youtube="#"
+        data-amazon="https://www.amazon.es/Fins-porti-bast%C3%B3-Santa-Mandra/dp/B0FSTJS7BS">
         <img class="album-cover" src="https://raw.githubusercontent.com/santamandra/santamandra.github.io/refs/heads/main/assets/FinsQuePortiBasto.jpeg" alt="Album">
 
         <div class="album-content">
@@ -635,7 +645,12 @@
         </div>
       </div>
 
-      <div class="album-card">
+      <div class="album-card"
+        data-title="El Cap a la Lluna"
+        data-spotify="https://open.spotify.com/album/37lY9zerj1f1g36jsDZ3Ca"
+        data-apple="https://music.apple.com/us/album/el-cap-a-la-lluna-single/1675159252?uo=4"
+        data-youtube="#"
+        data-amazon="https://www.amazon.es/music/player/albums/B0C2DBX836">
         <img class="album-cover" src="https://raw.githubusercontent.com/santamandra/santamandra.github.io/refs/heads/main/assets/ElCapALaLluna.jpeg" alt="Album">
 
         <div class="album-content">
@@ -710,11 +725,21 @@
     </div>
   </section>
 
-  <section id="concerts">
+<section id="concerts">
     <h2 class="section-title">Concerts</h2>
 
     <div class="concerts-list" id="concertsList">
       <!-- Bandsintown concerts will load here automatically -->
+    </div>
+
+    <div style="text-align:center; margin-top:40px;">
+      <button class="ticket-btn" id="togglePastEventsBtn">
+        Show Past Events
+      </button>
+    </div>
+
+    <div class="concerts-list" id="pastConcertsList" style="display:none; margin-top:32px;">
+      <!-- Past events will load here -->
     </div>
   </section>
 
@@ -752,34 +777,34 @@
     </div>
   </footer>
 
-  <!-- STREAMING MODAL -->
+    <!-- STREAMING MODAL -->
 
   <div class="streaming-modal" id="streamingModal">
     <div class="modal-content">
       <button class="close-modal" id="closeModal">✕</button>
 
-      <h2 class="modal-title">Album Name</h2>
+      <h2 class="modal-title" id="modalAlbumTitle">Album Name</h2>
       <p class="modal-subtitle">
         Choose your preferred platform
       </p>
 
       <div class="platform-links">
-        <a href="#" class="platform-link">
+        <a href="#" class="platform-link" id="spotifyLink" target="_blank">
           <span>Spotify</span>
           <span>→</span>
         </a>
 
-        <a href="#" class="platform-link">
+        <a href="#" class="platform-link" id="appleLink" target="_blank">
           <span>Apple Music</span>
           <span>→</span>
         </a>
 
-        <a href="#" class="platform-link">
+        <a href="#" class="platform-link" id="youtubeLink" target="_blank">
           <span>YouTube Music</span>
           <span>→</span>
         </a>
 
-        <a href="#" class="platform-link">
+        <a href="#" class="platform-link" id="amazonLink" target="_blank">
           <span>Amazon Music</span>
           <span>→</span>
         </a>
@@ -792,9 +817,25 @@
     const closeModal = document.getElementById('closeModal');
     const albumLinks = document.querySelectorAll('.listen-link');
 
+    const modalAlbumTitle = document.getElementById('modalAlbumTitle');
+    const spotifyLink = document.getElementById('spotifyLink');
+    const appleLink = document.getElementById('appleLink');
+    const youtubeLink = document.getElementById('youtubeLink');
+    const amazonLink = document.getElementById('amazonLink');
+
     albumLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
+
+        const albumCard = link.closest('.album-card');
+
+        modalAlbumTitle.textContent = albumCard.dataset.title;
+
+        spotifyLink.href = albumCard.dataset.spotify;
+        appleLink.href = albumCard.dataset.apple;
+        youtubeLink.href = albumCard.dataset.youtube;
+        amazonLink.href = albumCard.dataset.amazon;
+
         modal.classList.add('active');
       });
     });
@@ -813,6 +854,8 @@
   // BANDSINTOWN API INTEGRATION
 
     const concertsList = document.getElementById('concertsList');
+
+    let pastEventsLoaded = false;
 
     async function loadConcerts() {
       try {
@@ -875,6 +918,72 @@
     }
 
     loadConcerts();
+
+    // PAST EVENTS
+
+    const togglePastEventsBtn = document.getElementById('togglePastEventsBtn');
+    const pastConcertsList = document.getElementById('pastConcertsList');
+
+    async function loadPastConcerts() {
+      try {
+        const response = await fetch(
+          'https://rest.bandsintown.com/artists/Santa%20Mandra/events?app_id=17e0045a84be811152fa64e0adaf9b52&date=past'
+        );
+
+        const events = await response.json();
+
+        if (!events.length || events.error) {
+          pastConcertsList.innerHTML = `
+            <div class="concert-card">
+              <div>
+                <div class="concert-date">NO PAST EVENTS</div>
+              </div>
+            </div>
+          `;
+
+          return;
+        }
+
+        pastConcertsList.innerHTML = events.map(event => {
+          const date = new Date(event.datetime);
+
+          const formattedDate = date.toLocaleDateString('ca-ES', {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric'
+          }).toUpperCase();
+
+          return `
+            <div class="concert-card">
+              <div>
+                <div class="concert-date">${formattedDate}</div>
+                <h3>${event.venue.city} · ${event.venue.name}</h3>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    togglePastEventsBtn.addEventListener('click', async () => {
+      const isVisible = pastConcertsList.style.display === 'block';
+
+      if (isVisible) {
+        pastConcertsList.style.display = 'none';
+        togglePastEventsBtn.textContent = 'Show Past Events';
+      } else {
+        pastConcertsList.style.display = 'block';
+        togglePastEventsBtn.textContent = 'Hide Past Events';
+
+        if (!pastEventsLoaded) {
+          await loadPastConcerts();
+          pastEventsLoaded = true;
+        }
+      }
+    });
 
   </script>
 

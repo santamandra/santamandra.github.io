@@ -624,7 +624,7 @@
         <img class="album-cover" src="https://raw.githubusercontent.com/santamandra/santamandra.github.io/refs/heads/main/assets/DirecteAlCornamusam.jpeg" alt="Album">
 
         <div class="album-content">
-          <h3>Album Name</h3>
+          <h3>Santa Mandra en directe al Cornamusam</h3>
           <p>2026 · EP</p>
           <a href="#" class="listen-link">Escoltar àlbum →</a>
         </div>
@@ -734,7 +734,7 @@
 
     <div style="text-align:center; margin-top:40px;">
       <button class="ticket-btn" id="togglePastEventsBtn">
-        Show Past Events
+        Mostra esdeveniments passats
       </button>
     </div>
 
@@ -973,10 +973,10 @@
 
       if (isVisible) {
         pastConcertsList.style.display = 'none';
-        togglePastEventsBtn.textContent = 'Show Past Events';
+        togglePastEventsBtn.textContent = 'Mostra esdeveniments passats';
       } else {
         pastConcertsList.style.display = 'block';
-        togglePastEventsBtn.textContent = 'Hide Past Events';
+        togglePastEventsBtn.textContent = 'Amaga esdeveniments passats';
 
         if (!pastEventsLoaded) {
           await loadPastConcerts();

@@ -885,7 +885,7 @@
         concertsList.innerHTML = events.map(event => {
           const date = new Date(event.datetime);
 
-          const formattedDate = date.toLocaleDateString('en-GB', {
+          const formattedDate = date.toLocaleDateString('ca-ES', {
             day: '2-digit',
             month: 'long',
             year: 'numeric'

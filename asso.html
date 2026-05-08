@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Santa Mandra — L'associació</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+   <link rel="icon" type="image/png" sizes="32x32" href="https://github.com/santamandra/santamandra.github.io/blob/main/assets/LogoClear32.png?raw=true">
+   <link rel="icon" type="image/png" sizes="16x16" href="https://github.com/santamandra/santamandra.github.io/blob/main/assets/LogoClear16.png?raw=true">
+   <link rel="apple-touch-icon" sizes="180x180" href="https://github.com/santamandra/santamandra.github.io/blob/main/assets/LogoClear180.png?raw=true">
+
+  <style>
+    :root {
+      --cream: #f4eddc;
+      --black: #010101;
+      --yellow: #fbbb21;
+      --soft-yellow: #f5d096;
+      --white: #ffffff;
+      --gray: #8b8b8b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--cream);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    section {
+      padding: 110px 8%;
+    }
+
+    .section-title {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      letter-spacing: 2px;
+      font-weight: 800;
+      line-height: 0.95;
+    }
+
+    /* HEADER */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      padding: 24px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(1, 1, 1, 0.45);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo {
+      color: var(--cream);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      transition: 0.3s ease;
+    }
+
+    .logo:hover {
+      color: var(--yellow);
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--cream);
+      font-size: 0.95rem;
+      position: relative;
+      transition: 0.3s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 2px;
+      background: var(--yellow);
+      transition: 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* HERO */
+
+    .about-hero {
+      min-height: 85vh;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 180px 8% 80px;
+      color: var(--cream);
+      overflow: hidden;
+    }
+
+    .about-hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .about-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.75),
+        rgba(0,0,0,0.2)
+      );
+      z-index: -1;
+    }
+
+    .about-hero-content {
+      max-width: 850px;
+    }
+
+    .about-hero-content h1 {
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      font-weight: 800;
+      letter-spacing: 4px;
+    }
+
+    .about-hero-content p {
+      font-size: 1.1rem;
+      text-wrap: balance;
+      max-width: 600px;
+      line-height: 1.8;
+    }
+
+    /* STORY */
+
+    .story-block {
+      margin-bottom: 46px;
+    }
+
+    .story-subtitle {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+      color: var(--yellow);
+      margin-bottom: 18px;
+    }
+
+    .story-subtitle::before {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--yellow);
+      margin-bottom: 12px;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .story-text p {
+      font-size: 1.05rem;
+      line-height: 2;
+      margin-bottom: 28px;
+      color: rgba(1,1,1,0.82);
+    }
+
+    .story-image img {
+      border-radius: 34px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+      object-fit: cover;
+      min-height: 650px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: var(--black);
+      color: var(--cream);
+      padding: 80px 8% 40px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+
+    .footer-title {
+      font-size: 1.1rem;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+
+    .footer-column p,
+    .footer-column a {
+      opacity: 0.8;
+      line-height: 1.8;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 950px) {
+      header {
+        flex-direction: column;
+        gap: 18px;
+        padding: 18px 6%;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .story-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .story-image img {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      section {
+        padding: 90px 6%;
+      }
+
+      .about-hero {
+        min-height: 100svh;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 120px 7% 70px;
+      }
+
+      .about-hero-content {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .about-hero-content h1 {
+        font-size: clamp(2.2rem, 11vw, 4.2rem);
+        line-height: 0.95;
+        letter-spacing: 1px;
+        margin-bottom: 18px;
+        word-break: normal;
+        overflow-wrap: normal;
+        hyphens: none;
+        white-space: normal;
+        text-align: center;
+        width: 100%;
+      }
+
+      .about-hero-content p {
+        width: 100%;
+        max-width: 320px;
+        font-size: 1rem;
+        line-height: 1.7;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .identity-tags {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">SANTA MANDRA</a>
+
+    <nav>
+      <a href="index.html#music">Música</a>
+      <a href="https://santamandra.sumupstore.com/" target="_blank">Botiga</a>
+      <a href="index.html#videos">Vídeo</a>
+      <a href="index.html#concerts">Concerts</a>
+      <a href="about.html">Nosaltres</a>
+      <a href="asso.html">L'associació</a>
+    </nav>
+  </header>
+
+  <section class="about-hero">
+
+    <!--<img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1600&auto=format&fit=crop" alt="Santa Mandra">-->    
+    <img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Background2_1600.jpg?raw=true" alt="Santa Mandra">
+
+    <div class="about-overlay"></div>
+
+    <div class="about-hero-content">
+      <h1>Associació Santa Mandra</h1>
+
+      <p>
+        Des de la Garrotxa, Santa Mandra transforma la festa, la ràbia i la tendresa en rock elèctric carregat d'identitat pròpia.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="story-grid">
+
+      <div class="story-text">
+        <h2 class="section-title">Qui som</h2>
+
+        <div class="story-block">
+          <div class="story-subtitle">Origen</div>
+
+          <p>
+            Santa Mandra neix entre carreteres secundàries, bars de poble i nits llargues a la Garrotxa. Amb una sonoritat que barreja rock, electrònica i energia festiva, el projecte creix amb la voluntat de crear directes intensos i cançons que connectin amb la gent des del primer crit fins a l'últim brindis.
+          </p>
+        </div>
+
+        <div class="story-block">
+          <div class="story-subtitle">Directe</div>
+
+          <p>
+            Les nostres cançons parlen de comunitat, de fugir de la rutina, de les contradiccions de créixer i de la necessitat constant de celebrar la vida amb els altres. Tot això amb una estètica pròpia i una aposta clara per fer de cada concert una experiència compartida.
+          </p>
+        </div>
+
+        <div class="story-block">
+          <div class="story-subtitle">Comunitat</div>
+
+          <p>
+            Més que un grup, Santa Mandra és una manera d'entendre la música: intensa, honesta i propera. Ens mou la carretera, la gent que canta amb nosaltres i les nits que semblen no acabar mai.
+          </p>
+        </div>
+      </div>
+
+      <div class="story-image">
+        <!--<img src="https://images.unsplash.com/photo-1501612780327-45045538702b?q=80&w=1200&auto=format&fit=crop" alt="Santa Mandra band photo">-->
+        <img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Concert.jpg?raw=true" alt="Santa Mandra band photo">
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-column">
+        <h3 class="footer-title"></h3><!-- Santa Mandra -->
+        <p>
+          Santa Mandra gloriosa, guardeu-me de treballar; <br>
+		      doneu-me la nit per jaure i el dia per descansar.
+        </p>
+		    <img src="https://raw.githubusercontent.com/santamandra/santamandra.github.io/refs/heads/main/assets/Band%20Logo_white_no_bg2.png" alt="Santa Mandra" style="width:20% !important; margin-left:29% !important;" >
+      </div>
+      
+
+      <div class="footer-column">
+        <h3 class="footer-title">Booking</h3>
+        <p>Aida Cullell</p>
+        <p>acullelmartin@email.com</p>
+        <p>+34 618 82 02 71</p>
+      </div>
+
+      <div class="footer-column">
+        <h3 class="footer-title">Segueix-nos</h3>
+        <p><a href="https://www.instagram.com/santa.mandra/">Instagram</a></p>
+        <p><a href="https://open.spotify.com/artist/0L6lGeDbX9MVzkz5SqHbwv?si=tSa2bfVrSO2i5UtWc5dYhQ">Spotify</a></p>
+        <p><a href="https://www.youtube.com/@santamandragrup">YouTube</a></p>
+        <p><a href="https://www.tiktok.com/@santamandra">TikTok</a></p>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 Santa Mandra — All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

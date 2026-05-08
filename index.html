@@ -951,7 +951,8 @@
           return;
         }
 
-        pastConcertsList.innerHTML = events.map(event => {
+        /*pastConcertsList.innerHTML = events.map(event => {*/
+		pastConcertsList.innerHTML = events.reverse().map(event => {
           const date = new Date(event.datetime);
 
           const formattedDate = date.toLocaleDateString('ca-ES', {

@@ -424,10 +424,10 @@
 
       <div class="footer-column">
         <h3 class="footer-title">Segueix-nos</h3>
-        <p><a href="https://www.instagram.com/santa.mandra/">Instagram</a></p>
-        <p><a href="https://open.spotify.com/artist/0L6lGeDbX9MVzkz5SqHbwv?si=tSa2bfVrSO2i5UtWc5dYhQ">Spotify</a></p>
-        <p><a href="https://www.youtube.com/@santamandragrup">YouTube</a></p>
-        <p><a href="https://www.tiktok.com/@santamandra">TikTok</a></p>
+        <p><a href="https://www.instagram.com/santa.mandra/" class="external-link">Instagram</a></p>
+        <p><a href="https://open.spotify.com/artist/0L6lGeDbX9MVzkz5SqHbwv?si=tSa2bfVrSO2i5UtWc5dYhQ" class="external-link">Spotify</a></p>
+        <p><a href="https://www.youtube.com/@santamandragrup" class="external-link">YouTube</a></p>
+        <p><a href="https://www.tiktok.com/@santamandra" class="external-link">TikTok</a></p>
       </div>
 
     </div>
@@ -436,6 +436,15 @@
       © 2026 Santa Mandra — All rights reserved.
     </div>
   </footer>
-
+  <script>
+		/*Per fer que els links en telefon vagin cap a la app però que en pc obrin new tab*/
+		const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+		if (!isMobile) {
+	  		document.querySelectorAll('.external-link').forEach(link => {
+	    	link.setAttribute('target', '_blank');
+	    	link.setAttribute('rel', 'noopener noreferrer');
+	  		});
+		}
+  </script>
 </body>
 </html>

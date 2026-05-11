@@ -213,6 +213,86 @@
       object-fit: cover;
       min-height: 650px;
     }
+	/* CONTACT */
+
+    .contact-section {
+      background: #efe6d1;
+      border-radius: 40px;
+      margin: 0 8% 110px;
+      padding: 80px 7%;
+    }
+
+    .contact-header {
+      margin-bottom: 50px;
+      max-width: 700px;
+    }
+
+    .contact-header p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: rgba(1,1,1,0.75);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .contact-card {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 28px;
+      padding: 34px;
+      transition: 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+    }
+
+    .contact-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--yellow);
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    .contact-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+    }
+
+    .contact-card p {
+      line-height: 1.8;
+      color: rgba(1,1,1,0.78);
+      margin-bottom: 22px;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--black);
+      transition: 0.3s ease;
+    }
+
+    .contact-link:hover {
+      color: var(--yellow);
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 640px) {
+      .contact-section {
+        margin: 0 6% 90px;
+        padding: 60px 24px;
+      }
+    }
 
     /* FOOTER */
 
@@ -391,6 +471,70 @@
       </div>
 
     </div>
+  </section>
+  <section class="contact-section">
+
+    <div class="contact-header">
+      <h2 class="section-title">Contacte</h2>
+
+      <p>
+        Si vols portar Santa Mandra al teu festival, festa major o sala,
+        o simplement vols escriure’ns, aquí tens les diferents vies de contacte.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+
+      <div class="contact-card">
+        <div class="contact-label">Booking</div>
+
+        <h3>Aida Cullell</h3>
+
+        <p>
+          Contractació, festivals, sales i propostes de concerts.
+        </p>
+
+        <a
+          href="mailto:acullelmartin@gmail.com"
+          class="contact-link">
+          Escriu-nos →
+        </a>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-label">Xarxes</div>
+
+        <h3>Segueix el projecte</h3>
+
+        <p>
+          Descobreix novetats, concerts, vídeos i tot el que passa al nostre univers.
+        </p>
+
+        <a
+          href="https://www.instagram.com/santa.mandra/"
+          class="contact-link external-link">
+          Instagram →
+        </a>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-label">Premsa</div>
+
+        <h3>Media & col·laboracions</h3>
+
+        <p>
+          Entrevistes, ràdio, podcasts o qualsevol proposta artística.
+        </p>
+
+        <a
+          href="mailto:acullelmartin@gmail.com"
+          class="contact-link">
+          Contactar →
+        </a>
+      </div>
+
+    </div>
+	
   </section>
 
   <footer>

@@ -213,6 +213,117 @@
       object-fit: cover;
       min-height: 650px;
     }
+	/* ASSOCIACIÓ SECTIONS */
+
+	.asso-sections {
+	  padding: 110px 8%;
+	}
+	.asso-intro {
+	  margin-bottom: 90px;
+	  max-width: 700px;
+	}
+
+	.asso-intro p {
+	  font-size: 1.05rem;
+	  line-height: 1.9;
+	  color: rgba(1,1,1,0.78);
+	}
+	.asso-row {
+	  display: grid;
+	  grid-template-columns: 1.3fr 0.7fr; //relació d'aspecte entre text i imatges.
+	  gap: 70px;
+	  align-items: start;
+	  margin-bottom: 120px;
+	}
+	
+
+	.asso-row.reverse .asso-text {
+	  order: 2;
+	}
+
+	.asso-row.reverse .carousel {
+	  order: 1;
+	}
+
+	.asso-text p {
+	  font-size: 1.05rem;
+	  line-height: 2;
+	  color: rgba(1,1,1,0.82);
+	}
+
+	/* CAROUSEL */
+
+	.carousel {
+	  position: relative;
+	  width: 100%;
+	  max-width: 520px;
+	  margin: 0 auto;
+	  align-self: start;
+	}
+
+	.carousel-track {
+	  position: relative;
+	  overflow: hidden;
+	  border-radius: 34px;
+	  box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+	  aspect-ratio: 1 / 1;
+	}
+
+	.carousel-track img {
+	  position: absolute;
+	  inset: 0;
+	  width: 100%;
+	  height: 100%;
+	  object-fit: cover;
+	  opacity: 0;
+	  transition: opacity 0.45s ease;
+	}
+
+	.carousel-track img.active {
+	  opacity: 1;
+	}
+
+	.carousel-btn {
+	  position: absolute;
+	  top: 50%;
+	  transform: translateY(-50%);
+	  z-index: 10;
+	  border: none;
+	  width: 46px;
+	  height: 46px;
+	  border-radius: 50%;
+	  cursor: pointer;
+	  font-size: 1.2rem;
+	  background: rgba(255,255,255,0.75);
+	  backdrop-filter: blur(10px);
+	  transition: 0.25s ease;
+	}
+
+	.carousel-btn:hover {
+	  background: var(--yellow);
+	}
+
+	.carousel-btn.prev {
+	  left: 14px;
+	}
+
+	.carousel-btn.next {
+	  right: 14px;
+	}
+
+	@media (max-width: 950px) {
+
+	  .asso-row {
+		grid-template-columns: 1fr;
+		gap: 40px;
+		margin-bottom: 90px;
+	  }
+
+	  .asso-row.reverse {
+		direction: ltr;
+	  }
+	}
+	
 	/* CONTACT */
 
     .contact-section {
@@ -434,52 +545,99 @@
     </div>
   </section>
 
-  <section>
-    <div class="story-grid">
+	<section class="asso-sections">
+		<div class="asso-intro">
+		<h2 class="section-title">Què fem</h2>
 
-      <div class="story-text">
-        <h2 class="section-title">Què fem</h2>
-		<p> Aquests són els tres nostres principals serveis:</p>
-        <div class="story-block">
-          <div class="story-subtitle">Acompanyament</div>
+		<p>
+		  Aquests són els tres nostres principals serveis:
+		</p>
+		</div>
 
-          <p>
-            El servei d’acompanyament a músics és un procés de suport, orientació i desenvolupament artístic pensat per ajudar artistes o bandes emergents a créixer i professionalitzar el seu projecte musical.
+	  <!-- ACOMPANYAMENT -->
+	  <div class="asso-row">
+
+		<div class="asso-text">
+		  <div class="story-subtitle">Acompanyament</div>
+
+		  <p>
+			El servei d’acompanyament a músics és un procés de suport, orientació i desenvolupament artístic pensat per ajudar artistes o bandes emergents a créixer i professionalitzar el seu projecte musical.
 			L’acompanyament pot incloure diferents àmbits segons les necessitats de cada projecte: des del treball creatiu i conceptual de les cançons, fins a la definició de la identitat artística, la comunicació, la producció musical, la preparació del directe o la gestió professional del projecte.
 			L’objectiu és donar eines, recursos i espais de treball perquè els artistes puguin entendre millor el seu projecte, potenciar allò que els fa únics i construir un recorregut sostenible dins del sector musical.
-			Aquest procés acostuma a combinar sessions de treball personalitzades, assessorament estratègic, suport tècnic i connexió amb oportunitats reals del territori (concerts, gravacions, xarxa professional, material promocional, etc.).
-          </p>
-        </div>
+		  </p>
+		</div>
 
-        <div class="story-block">
-          <div class="story-subtitle">Producció</div>
+		<div class="carousel">
+		  <button class="carousel-btn prev">&#10094;</button>
 
-          <p>
-            Amb el temps hem anat adquirint material propi, experiència tècnica i coneixements de producció que ara posem al servei d’altres projectes, entitats i artistes.
-			Treballem en la producció d’esdeveniments de petit i mitjà format, ja siguin concerts, xerrades, conferències, presentacions, cicles culturals o altres activitats vinculades a la música i la cultura.
-			Oferim suport tant a nivell tècnic com organitzatiu: sonorització, muntatge, coordinació, suport logístic i assessorament general perquè cada proposta funcioni de manera propera, eficient i cuidada.
-			A més, comptem amb equip tècnic i material propi, fet que ens permet adaptar-nos a diferents formats i oferir un servei flexible i a un preu competitiu.
-          </p>
-        </div>
+		  <div class="carousel-track">
+			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true" class="active">
+			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Concert.jpg?raw=true">
+			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true">
+		  </div>
 
-        <div class="story-block">
-          <div class="story-subtitle">Lloguer</div>
+		  <button class="carousel-btn next">&#10095;</button>
+		</div>
 
-          <p>
-            En cas que només us interessi llogar cert material, també oferim aquest servei de manera independent, sense necessitat de contractar la producció completa de l’esdeveniment.
-			Disposem d’equip tècnic propi per a activitats i esdeveniments de petit i mitjà format: equips de so, microfonia, peus, cablejat, il·luminació bàsica i altres recursos tècnics habituals dins l’àmbit musical i cultural.
-			La idea és poder facilitar eines i recursos a projectes, entitats o artistes que necessitin cobrir necessitats puntuals, amb un servei proper, flexible i adaptat a cada situació.
-          </p>
-        </div>
-      </div>
+	  </div>
 
-      <div class="story-image">
-        <!--<img src="https://images.unsplash.com/photo-1501612780327-45045538702b?q=80&w=1200&auto=format&fit=crop" alt="Santa Mandra band photo">-->
-        <img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true" alt="Santa Mandra band photo">
-      </div>
 
-    </div>
-  </section>
+	  <!-- PRODUCCIÓ -->
+	  <div class="asso-row reverse">
+
+		<div class="asso-text">
+		  <div class="story-subtitle">Producció</div>
+
+		  <p>
+			Amb el temps hem anat adquirint material propi, experiència tècnica i coneixements de producció que ara posem al servei d’altres projectes, entitats i artistes.
+			Treballem en la producció d’esdeveniments de petit i mitjà format, ja siguin concerts, xerrades, conferències, presentacions o activitats culturals.
+			Oferim suport tècnic, logístic i organitzatiu perquè cada proposta funcioni de manera propera, eficient i cuidada.
+		  </p>
+		</div>
+
+		<div class="carousel">
+		  <button class="carousel-btn prev">&#10094;</button>
+
+		  <div class="carousel-track">
+			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Concert.jpg?raw=true" class="active">
+			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true">
+			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Concert.jpg?raw=true">
+		  </div>
+
+		  <button class="carousel-btn next">&#10095;</button>
+		</div>
+
+	  </div>
+
+
+	  <!-- LLOGUER -->
+	  <div class="asso-row">
+
+		<div class="asso-text">
+		  <div class="story-subtitle">Lloguer</div>
+
+		  <p>
+			També oferim servei de lloguer de material de manera independent.
+			Disposem d’equip tècnic propi per a activitats i esdeveniments de petit i mitjà format:
+			equips de so, microfonia, peus, cablejat, il·luminació bàsica i altres recursos tècnics.
+		  </p>
+		</div>
+
+		<div class="carousel">
+		  <button class="carousel-btn prev">&#10094;</button>
+
+		  <div class="carousel-track">
+			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true" class="active">
+			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Concert.jpg?raw=true">
+			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true">
+		  </div>
+
+		  <button class="carousel-btn next">&#10095;</button>
+		</div>
+
+	  </div>
+
+	</section>
   <section class="contact-section">
 
     <div class="contact-header">
@@ -499,13 +657,20 @@
         <h3>Aida Cullell</h3>
 
         <p>
-          Contractació, festivals, sales i propostes de concerts.
-        </p>
-
+          Contractació, festivals, sales, propostes de concerts i col·laboracions.
+		</p>
+		<!--<p>acullelmartin@gmail.com</p>
+        <p>+34 618 82 02 71</p>-->
         <a
           href="mailto:acullelmartin@gmail.com"
           class="contact-link">
-          Escriu-nos →
+          acullelmartin@gmail.com
+        </a>
+		<br><br>
+		<a
+          href="tel:+34678567876"
+          class="contact-link">
+          +34 678 56 78 76 
         </a>
       </div>
 
@@ -515,30 +680,43 @@
         <h3>Segueix el projecte</h3>
 
         <p>
-          Descobreix novetats, concerts, vídeos i tot el que passa al nostre univers.
+          Descobreix novetats, concerts, i tot el que passa al nostre univers mandrístic.
         </p>
 
         <a
           href="https://www.instagram.com/santa.mandra/"
           class="contact-link external-link">
           Instagram →
+        </a> 
+		<br><br>
+		<a
+          href="https://www.tiktok.com/@santamandra"
+          class="contact-link external-link">
+          TikTok →
         </a>
       </div>
 
       <div class="contact-card">
-        <div class="contact-label">Premsa</div>
+        <div class="contact-label">Serveis</div>
 
-        <h3>Media & col·laboracions</h3>
+        <h3>Associació Santa Mandra</h3>
 
         <p>
-          Entrevistes, ràdio, podcasts o qualsevol proposta artística.
+          T'interessa algun dels seveis de la nostra associació? (Acompanyament, Producció, Lloguer) Contacta'ns!
         </p>
-
+		<!--<p>+34 620 69 98 15 </p>-->
         <a
-          href="mailto:acullelmartin@gmail.com"
+          href="mailto:santamandragrup@gmail.com"
           class="contact-link">
-          Contactar →
+          santamandragrup@gmail.com
         </a>
+		<br><br>
+		<a
+          href="tel:+34620699815"
+          class="contact-link">
+          +34 620 69 98 15 
+        </a>
+
       </div>
 
     </div>
@@ -588,6 +766,55 @@
   		});
 	}
   </script>
+	<script>
+	  const carousels = document.querySelectorAll('.carousel');
 
+	  carousels.forEach(carousel => {
+
+		const images = carousel.querySelectorAll('img');
+		const nextBtn = carousel.querySelector('.next');
+		const prevBtn = carousel.querySelector('.prev');
+
+		let current = 0;
+
+		function showImage(index) {
+		  images.forEach(img => img.classList.remove('active'));
+		  images[index].classList.add('active');
+		}
+
+		nextBtn.addEventListener('click', () => {
+		  current = (current + 1) % images.length;
+		  showImage(current);
+		});
+
+		prevBtn.addEventListener('click', () => {
+		  current = (current - 1 + images.length) % images.length;
+		  showImage(current);
+		});
+
+		/* MOBILE SWIPE */
+
+		let startX = 0;
+
+		carousel.addEventListener('touchstart', e => {
+		  startX = e.touches[0].clientX;
+		});
+
+		carousel.addEventListener('touchend', e => {
+		  let endX = e.changedTouches[0].clientX;
+
+		  if (startX - endX > 50) {
+			current = (current + 1) % images.length;
+		  }
+
+		  if (endX - startX > 50) {
+			current = (current - 1 + images.length) % images.length;
+		  }
+
+		  showImage(current);
+		});
+
+	  });
+	</script>
 </body>
 </html>

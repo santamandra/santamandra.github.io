@@ -232,8 +232,8 @@
 	  display: grid;
 	  grid-template-columns: 1.3fr 0.7fr; //relació d'aspecte entre text i imatges.
 	  gap: 70px;
-	  align-items: start;
-	  margin-bottom: 120px;
+	  align-items: center; //abans tenia start i s'alineava amb el top del text!
+	  margin-bottom: 160px;
 	}
 	
 
@@ -250,37 +250,35 @@
 	  line-height: 2;
 	  color: rgba(1,1,1,0.82);
 	}
-
 	/* CAROUSEL */
 
 	.carousel {
 	  position: relative;
 	  width: 100%;
-	  max-width: 450px;
+	  max-width: 450px; //aqui controlem mida imatges
 	  margin: 0 auto;
-	  align-self: start;
+	  margin-bottom: 40px;
 	}
 
 	.carousel-track {
-	  position: relative;
+	  display: flex;
 	  overflow: hidden;
 	  border-radius: 34px;
 	  box-shadow: 0 20px 50px rgba(0,0,0,0.12);
 	  aspect-ratio: 1 / 1;
+	  scroll-behavior: smooth;
 	}
 
-	.carousel-track img {
-	  position: absolute;
-	  inset: 0;
+	.carousel-slides {
+	  display: flex;
 	  width: 100%;
-	  height: 100%;
-	  object-fit: cover;
-	  opacity: 0;
-	  transition: opacity 0.45s ease;
+	  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
-	.carousel-track img.active {
-	  opacity: 1;
+	.carousel-slides img {
+	  width: 100%;
+	  flex-shrink: 0;
+	  object-fit: cover;
 	}
 
 	.carousel-btn {
@@ -310,6 +308,8 @@
 	.carousel-btn.next {
 	  right: 14px;
 	}
+
+	
 
 	@media (max-width: 950px) {
 
@@ -571,9 +571,11 @@
 		  <button class="carousel-btn prev">&#10094;</button>
 
 		  <div class="carousel-track">
-			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true" class="active">
-			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Concert.jpg?raw=true">
-			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true">
+			<div class="carousel-slides">
+				<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true" class="active">
+				<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Concert.jpg?raw=true">
+				<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true">
+			</div>
 		  </div>
 
 		  <button class="carousel-btn next">&#10095;</button>
@@ -599,9 +601,11 @@
 		  <button class="carousel-btn prev">&#10094;</button>
 
 		  <div class="carousel-track">
-			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Concert.jpg?raw=true" class="active">
-			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true">
-			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Concert.jpg?raw=true">
+			<div class="carousel-slides">
+				<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Concert.jpg?raw=true" class="active">
+				<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true">
+				<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Concert.jpg?raw=true">
+			</div>
 		  </div>
 
 		  <button class="carousel-btn next">&#10095;</button>
@@ -627,9 +631,11 @@
 		  <button class="carousel-btn prev">&#10094;</button>
 
 		  <div class="carousel-track">
-			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true" class="active">
-			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Concert.jpg?raw=true">
-			<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true">
+			<div class="carousel-slides">
+				<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true" class="active">
+				<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Concert.jpg?raw=true">
+				<img src="https://github.com/santamandra/santamandra.github.io/blob/main/assets/Flying.jpeg?raw=true">
+			</div>
 		  </div>
 
 		  <button class="carousel-btn next">&#10095;</button>
@@ -766,55 +772,59 @@
   		});
 	}
   </script>
-	<script>
-	  const carousels = document.querySelectorAll('.carousel');
+<script>
+	const carousels = document.querySelectorAll('.carousel');
 
-	  carousels.forEach(carousel => {
+	carousels.forEach(carousel => {
 
-		const images = carousel.querySelectorAll('img');
-		const nextBtn = carousel.querySelector('.next');
-		const prevBtn = carousel.querySelector('.prev');
+	  const slides = carousel.querySelector('.carousel-slides');
+	  const images = carousel.querySelectorAll('img');
 
-		let current = 0;
+	  const nextBtn = carousel.querySelector('.next');
+	  const prevBtn = carousel.querySelector('.prev');
 
-		function showImage(index) {
-		  images.forEach(img => img.classList.remove('active'));
-		  images[index].classList.add('active');
+	  let current = 0;
+
+	  function updateCarousel() {
+		slides.style.transform = `translateX(-${current * 100}%)`;
+	  }
+
+	  nextBtn.addEventListener('click', () => {
+		current = (current + 1) % images.length;
+		updateCarousel();
+	  });
+
+	  prevBtn.addEventListener('click', () => {
+		current = (current - 1 + images.length) % images.length;
+		updateCarousel();
+	  });
+
+	  /* MOBILE SWIPE */
+
+	  let startX = 0;
+
+	  carousel.addEventListener('touchstart', e => {
+		startX = e.touches[0].clientX;
+	  });
+
+	  carousel.addEventListener('touchend', e => {
+
+		let endX = e.changedTouches[0].clientX;
+		let diff = startX - endX;
+
+		if (diff > 50) {
+		  current = (current + 1) % images.length;
 		}
 
-		nextBtn.addEventListener('click', () => {
-		  current = (current + 1) % images.length;
-		  showImage(current);
-		});
-
-		prevBtn.addEventListener('click', () => {
+		if (diff < -50) {
 		  current = (current - 1 + images.length) % images.length;
-		  showImage(current);
-		});
+		}
 
-		/* MOBILE SWIPE */
-
-		let startX = 0;
-
-		carousel.addEventListener('touchstart', e => {
-		  startX = e.touches[0].clientX;
-		});
-
-		carousel.addEventListener('touchend', e => {
-		  let endX = e.changedTouches[0].clientX;
-
-		  if (startX - endX > 50) {
-			current = (current + 1) % images.length;
-		  }
-
-		  if (endX - startX > 50) {
-			current = (current - 1 + images.length) % images.length;
-		  }
-
-		  showImage(current);
-		});
+		updateCarousel();
 
 	  });
-	</script>
+
+	});
+</script>
 </body>
 </html>

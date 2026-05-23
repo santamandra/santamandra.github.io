@@ -478,6 +478,17 @@
       background: var(--yellow);
       color: var(--black);
     }
+	.ticket-btn.free-ticket {
+	  background: var(--yellow);
+	  color: var(--black);
+	  cursor: default;
+	}
+
+	.ticket-btn.sold-out {
+	  background: #8b8b8b;
+	  color: white;
+	  cursor: default;
+	}
 
     /* FOOTER */
 
@@ -890,30 +901,88 @@
           return;
         }
 
-        concertsList.innerHTML = events.map(event => {
-          const date = new Date(event.datetime);
+		concertsList.innerHTML = events.map(event => {
 
-          const formattedDate = date.toLocaleDateString('ca-ES', {
-            day: '2-digit',
-            month: 'long',
-            year: 'numeric'
-          }).toUpperCase();
+		  const date = new Date(event.datetime);
 
-          return `
-            <div class="concert-card">
-              <div>
-                <div class="concert-date">${formattedDate}</div>
-                <h3>${event.venue.city} · ${event.venue.name}</h3>
-              </div>
+		  const formattedDate = date.toLocaleDateString('ca-ES', {
+			day: '2-digit',
+			month: 'long',
+			year: 'numeric'
+		  }).toUpperCase();
 
-              <a href="${event.offers?.[0]?.url || '#'}"
-                 target="_blank"
-                 class="ticket-btn">
-                 Entrades
-              </a>
-            </div>
-          `;
-        }).join('');
+		  /* BUTTON LOGIC */
+
+		  const isFree =
+			event.free === true ||
+			event.offers?.some(offer =>
+			  offer.type?.toLowerCase().includes('free')
+			);
+
+		  const isSoldOut =
+			event.offers?.some(offer =>
+			  offer.status?.toLowerCase().includes('sold out')
+			) ||
+			event.soldout === true;
+
+		  const ticketUrl = event.offers?.[0]?.url;
+
+		  let buttonHTML = '';
+
+		  /* SOLD OUT */
+		  if (isSoldOut) {
+
+			buttonHTML = `
+			  <div class="ticket-btn sold-out">
+				Sold Out
+			  </div>
+			`;
+
+		  }
+
+		  /* FREE EVENT */
+		  else if (isFree) {
+
+			buttonHTML = `
+			  <div class="ticket-btn free-ticket">
+				Entrada Gratuïta
+			  </div>
+			`;
+
+		  }
+
+		  /* NORMAL TICKETS */
+		  else if (ticketUrl) {
+
+			buttonHTML = `
+			  <a href="${ticketUrl}"
+				 target="_blank"
+				 class="ticket-btn">
+				 Entrades
+			  </a>
+			`;
+
+		  }
+
+		  /* NO BUTTON IF NO URL */
+		  else {
+
+			buttonHTML = '';
+
+		  }
+
+		  return `
+			<div class="concert-card">
+			  <div>
+				<div class="concert-date">${formattedDate}</div>
+				<h3>${event.venue.city} · ${event.venue.name}</h3>
+			  </div>
+
+			  ${buttonHTML}
+			</div>
+		  `;
+
+		}).join('');
 
       } catch (error) {
         concertsList.innerHTML = `

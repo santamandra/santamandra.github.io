@@ -230,10 +230,10 @@
 	}
 	.asso-row {
 	  display: grid;
-	  grid-template-columns: 1.3fr 0.7fr; //relació d'aspecte entre text i imatges.
+	  grid-template-columns: 1.0fr 1.0fr; //relació d'aspecte entre text i imatges. abans 1.2 0.8
 	  gap: 70px;
 	  align-items: center; //abans tenia start i s'alineava amb el top del text!
-	  margin-bottom: 160px;
+	  margin-bottom: 140px;
 	}
 	
 
@@ -255,7 +255,7 @@
 	.carousel {
 	  position: relative;
 	  width: 100%;
-	  max-width: 450px; //aqui controlem mida imatges
+	  max-width: 650px; //aqui controlem mida imatges
 	  margin: 0 auto;
 	  margin-bottom: 40px;
 	}
@@ -318,9 +318,12 @@
 		gap: 22px; /*reduced from 40*/
 		margin-bottom: 45px; /*reduced from 90*/
 	  }
-
-	  .asso-row.reverse {
-		direction: ltr;
+	  .asso-row.reverse .asso-text,
+	  .asso-row.reverse .carousel {
+		order: initial;
+	  }
+	  .carousel {
+		max-width: 100%;
 	  }
 	  .asso-intro {
     	margin-bottom: 45px;
@@ -588,7 +591,7 @@
 
 
 	  <!-- PRODUCCIÓ -->
-	  <div class="asso-row">
+	  <div class="asso-row reverse">
 
 		<div class="asso-text">
 		  <div class="story-subtitle">Producció</div>
